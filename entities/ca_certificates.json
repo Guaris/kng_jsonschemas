@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "created_at": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "cert": {
+        "type": "string"
+      },
+      "cert_digest": {
+        "type": "string",
+        "unique": true
+      },
+      "tags": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "x-validations": {
+      "transformations": [
+        {
+          "input": ["cert"],
+          "on_write": "function(cert) { ... }"
+        }
+      ]
+    }
+  }

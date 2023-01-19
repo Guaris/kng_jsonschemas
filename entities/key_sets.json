@@ -1,0 +1,52 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"id": {
+			"type": "string",
+			"format": "uuid"
+		},
+		"created_at": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"name": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 255,
+			"unique": true
+		},
+		"tags": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"key": {
+			"type": "string"
+		},
+		"algorithm": {
+			"type": "string",
+			"enum": ["HS256", "HS384", "HS512", "RS256", "RS384", "RS512", "ES256", "ES384", "ES512"]
+		},
+		"secret": {
+			"type": "string",
+			"encrypted": true
+		},
+		"consumer": {
+			"type": "object",
+			"properties": {
+				"x-validation": {
+					"reference": "consumers"
+				}
+			}
+		},
+		"rsa_public_key": {
+			"type": "string"
+		},
+		"rsa_private_key": {
+			"type": "string",
+			"encrypted": true
+		}
+	}
+}

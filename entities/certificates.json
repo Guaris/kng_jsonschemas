@@ -1,0 +1,43 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "certificates",
+	"type": "object",
+	"required": ["cert", "key"],
+	"properties": {
+		"id": {
+			"type": "string",
+			"format": "uuid"
+		},
+		"created_at": {
+			"type": "integer"
+		},
+		"cert": {
+			"type": "string",
+			"format": "certificate",
+			"referenceable": true
+		},
+		"key": {
+			"type": "string",
+			"format": "key",
+			"referenceable": true,
+			"encrypted": true
+		},
+		"cert_alt": {
+			"type": "string",
+			"format": "certificate",
+			"referenceable": true
+		},
+		"key_alt": {
+			"type": "string",
+			"format": "key",
+			"referenceable": true,
+			"encrypted": true
+		},
+		"tags": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		}
+	}
+}

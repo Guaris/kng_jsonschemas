@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+
+    "tags": {
+      "type": "object",
+      "properties": {
+        "tag": { "$ref": "typedefs/tag.json" },
+        "entity_name": { "type": "string" },
+        "entity_id": { "$ref": "typedefs/uuid.json" },
+        "name": { "type":"string" },
+        "primary_key": { "type":"object", "properties": {"tag": {"type":"string"}} },
+        "endpoint_key": {"type":"string" },
+        "dao": {"type":"string" },
+        "db_export": {"type":"boolean" }
+      },
+      "required": ["tag","entity_name","entity_id"]
+    }
+  
+}

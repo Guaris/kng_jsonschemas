@@ -1,0 +1,94 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"id": {
+			"type": "string",
+			"format": "uuid"
+		},
+		"created_at": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"updated_at": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"name": {
+			"type": "string"
+		},
+		"retries": {
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 32767,
+			"default": 5
+		},
+		"protocol": {
+			"type": "string",
+			"enum": [
+				"http",
+				"https",
+				"grpc",
+				"grpcs"
+			],
+			"default": "http"
+		},
+		"host": {
+			"type": "string"
+		},
+		"port": {
+			"type": "integer",
+			"default": 80
+		},
+		"path": {
+			"type": "string"
+		},
+		"connect_timeout": {
+			"type": "integer"
+		},
+		"write_timeout": {
+			"type": "integer",
+			"minimum": 1,
+			"x-validation-greater-than": "read_timeout"
+		},
+		"read_timeout": {
+			"type": "integer",
+			"minimum": 1
+		},
+		"tags": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"client_certificate": {
+			"type": "string",
+			"format": "uuid",
+			"x-foreign": {
+				"reference": "certificates"
+			}
+		},
+		"tls_verify": {
+			"type": "boolean"
+		},
+		"tls_verify_depth": {
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 64
+		},
+		"ca_certificates": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"format": "uuid"
+			}
+		},
+		"enabled": {
+			"type": "boolean",
+			"default": true
+		},
+        "x-validation-entity_check": {
+            "type": "null"
+        }
+	}
+}

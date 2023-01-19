@@ -1,97 +1,120 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "type": "object",
-    "properties": {
-      "id": {
-        "type": "string",
-        "format": "uuid"
-      },
-      "created_at": {
-        "type": "string",
-        "format": "date-time"
-      },
-      "updated_at": {
-        "type": "string",
-        "format": "date-time"
-      },
-      "name": {
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 255
-      },
-      "protocols": {
-        "type": "array",
-        "minItems": 1,
-        "items": {
-          "type": "string",
-          "enum": ["http", "https", "tcp", "tls", "udp", "grpc", "grpcs", "tls_passthrough"]
-        },
-        "uniqueItems": true,
-        "x-mutually-exclusive-subsets": [
-          ["http", "https"],
-          ["tcp", "tls", "udp"],
-          ["tls_passthrough"],
-          ["grpc", "grpcs"]
-        ],
-        "default": ["http", "https"]
-      },
-      "https_redirect_status_code": {
-        "type": "integer",
-        "enum": [426, 301, 302, 307, 308],
-        "default": 426,
-        "required": true
-      },
-      "strip_path": {
-        "type": "boolean",
-        "default": true,
-        "required": true
-      },
-      "preserve_host": {
-        "type": "boolean",
-        "default": false,
-        "required": true
-      },
-      "request_buffering": {
-        "type": "boolean",
-        "default": true,
-        "required": true
-      },
-      "response_buffering": {
-        "type": "boolean",
-        "default": true,
-        "required": true
-      },
-      "tags": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        }
-      },
-      "service": {
-        "type": "object",
-        "properties": {
-          "x-foreign": {
-            "reference": "services"
-          }
-        }
-      },
-      "expression": {
-        "type": "string",
-        "required": true
-      },
-      "priority": {
-        "type": "integer",
-        "required": true,
-        "default": 0
-      }
-    },
-    "x-validation": {
-      "custom_entity_check": {
-        "field_sources": [
-          "expression",
-          "id"
-        ],
-        "fn": "function(entity) local r = router.new(CACHED_SCHEMA) local res, err = r:add_matcher(0, entity.id, entity.expression) if not res then return nil, 'Router Expression failed validation: ' .. err end return true end"
-      }
-    }
-  }
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"id": {
+			"type": "string",
+			"format": "uuid"
+		},
+		"created_at": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"updated_at": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"name": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 255
+		},
+		"protocols": {
+			"type": "array",
+			"minItems": 1,
+			"items": {
+				"type": "string",
+				"enum": [
+					"http",
+					"https",
+					"tcp",
+					"tls",
+					"udp",
+					"grpc",
+					"grpcs",
+					"tls_passthrough"
+				]
+			},
+			"uniqueItems": true,
+			"x-validation-subsets": [
+				[
+					"http",
+					"https"
+				],
+				[
+					"tcp",
+					"tls",
+					"udp"
+				],
+				[
+					"tls_passthrough"
+				],
+				[
+					"grpc",
+					"grpcs"
+				]
+			],
+			"default": [
+				"http",
+				"https"
+			]
+		},
+		"https_redirect_status_code": {
+			"type": "integer",
+			"enum": [
+				426,
+				301,
+				302,
+				307,
+				308
+			],
+			"default": 426
+
+		},
+		"strip_path": {
+			"type": "boolean",
+			"default": true
+
+		},
+		"preserve_host": {
+			"type": "boolean",
+			"default": false
+
+		},
+		"request_buffering": {
+			"type": "boolean",
+			"default": true
+
+		},
+		"response_buffering": {
+			"type": "boolean",
+			"default": true
+
+		},
+		"tags": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"service": {
+			"type": "object",
+			"properties": {
+				"x-foreign": {
+					"reference": "services"
+				}
+			}
+		},
+		"expression": {
+			"type": "string"
+
+		},
+		"priority": {
+			"type": "integer",
+			"default": 0
+		}
+	},
+	"x-validation-entity_check": {
+    "type": "null"
+}
+}
